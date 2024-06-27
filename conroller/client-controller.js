@@ -58,8 +58,32 @@ const delClient = async (req, res, next) => {
   });
 };
 
+
+const updateClient = async (req, res, next) => {
+  const {id, name, ipn, tel, credit, targetCredit, sum, intrest, departmentNum } =
+    req.body;
+    console.log(id, name, ipn, tel, credit, targetCredit, sum, intrest, departmentNum )
+    await Client.findOneAndUpdate({ _id: id }, {
+    name,
+    ipn,
+    tel,
+    credit,
+    targetCredit,
+    sum,
+    intrest,
+    departmentNum,
+  });
+  const result = await Client.find({departmentNum})
+console.log(result)
+  res.json({
+    status: "success",
+    code: 200,
+    result,
+  });
+};
 module.exports = {
   clientList,
   addClient,
   delClient,
+  updateClient
 };
