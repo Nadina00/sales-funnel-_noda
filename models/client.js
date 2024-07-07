@@ -27,7 +27,7 @@ const clientSchema = new Schema({
   departmentNum: {
     type: Number,
   }, 
-  note: {
+  textNote: {
    type: String, 
   }
   

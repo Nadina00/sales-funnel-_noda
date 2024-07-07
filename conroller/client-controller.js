@@ -25,7 +25,7 @@ const clientList = async (req, res, next) => {
 };
 
 const addClient = async (req, res, next) => {
-  const { name, ipn, tel, credit, targetCredit, sum, intrest, departmentNum, note } =
+  const { name, ipn, tel, credit, targetCredit, sum, intrest, departmentNum, textNote } =
     req.body;
   console.log({ name, ipn, tel, credit, intrest, targetCredit, note });
   const client = await Client.create({
@@ -37,7 +37,7 @@ const addClient = async (req, res, next) => {
     sum,
     intrest,
     departmentNum,
-    note
+    textNote
   });
 
   res.json({
@@ -61,7 +61,7 @@ const delClient = async (req, res, next) => {
 
 
 const updateClient = async (req, res, next) => {
-  const {id, name, ipn, tel, credit, targetCredit, sum, intrest, departmentNum, note } =
+  const {id, name, ipn, tel, credit, targetCredit, sum, intrest, departmentNum, textNote } =
     req.body;
     console.log(id, name, ipn, tel, credit, targetCredit, sum, intrest, departmentNum )
     await Client.findOneAndUpdate({ _id: id }, {
@@ -73,7 +73,7 @@ const updateClient = async (req, res, next) => {
     sum,
     intrest,
     departmentNum,
-    note
+    textNote
   });
   const result = await Client.find({departmentNum})
 console.log(result)
