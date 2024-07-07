@@ -27,7 +27,7 @@ const clientList = async (req, res, next) => {
 const addClient = async (req, res, next) => {
   const { name, ipn, tel, credit, targetCredit, sum, intrest, departmentNum, textNote } =
     req.body;
-  console.log({ name, ipn, tel, credit, intrest, targetCredit, note });
+  console.log({ name, ipn, tel, credit, intrest, targetCredit, textNote });
   const client = await Client.create({
     name,
     ipn,
