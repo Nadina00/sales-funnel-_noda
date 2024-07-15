@@ -7,10 +7,9 @@ const clientList = async (req, res, next) => {
   let result = {};
   if (departmentNum === "Головний офіс") {
     result = await Client.find({});
-  } else if(departmentNum === "charge"){
-    result = []
-  }
-   else {
+  } else if (departmentNum === "charge") {
+    result = [];
+  } else {
     result = await Client.find({ departmentNum });
   }
   if (!result) {
@@ -25,10 +24,8 @@ const clientList = async (req, res, next) => {
 };
 
 const addClient = async (req, res, next) => {
-  const { name, ipn, tel, credit, targetCredit, sum, intrest, departmentNum, textNote } =
-    req.body;
-  console.log({ name, ipn, tel, credit, intrest, targetCredit, textNote });
-  const client = await Client.create({
+  const {
+    date,
     name,
     ipn,
     tel,
@@ -37,7 +34,29 @@ const addClient = async (req, res, next) => {
     sum,
     intrest,
     departmentNum,
-    textNote
+    textNote,
+  } = req.body;
+  console.log({
+    date,
+    name,
+    ipn,
+    tel,
+    credit,
+    intrest,
+    targetCredit,
+    textNote,
+  });
+  const client = await Client.create({
+    date,
+    name,
+    ipn,
+    tel,
+    credit,
+    targetCredit,
+    sum,
+    intrest,
+    departmentNum,
+    textNote,
   });
 
   res.json({
@@ -59,12 +78,10 @@ const delClient = async (req, res, next) => {
   });
 };
 
-
 const updateClient = async (req, res, next) => {
-  const {id, name, ipn, tel, credit, targetCredit, sum, intrest, departmentNum, textNote } =
-    req.body;
-    console.log(id, name, ipn, tel, credit, targetCredit, sum, intrest, departmentNum )
-    await Client.findOneAndUpdate({ _id: id }, {
+  const {
+    id,
+    date,
     name,
     ipn,
     tel,
@@ -73,10 +90,37 @@ const updateClient = async (req, res, next) => {
     sum,
     intrest,
     departmentNum,
-    textNote
-  });
-  const result = await Client.find({departmentNum})
-console.log(result)
+    textNote,
+  } = req.body;
+  console.log(
+    id,
+    date,
+    name,
+    ipn,
+    tel,
+    credit,
+    targetCredit,
+    sum,
+    intrest,
+    departmentNum
+  );
+  await Client.findOneAndUpdate(
+    { _id: id },
+    {
+      date,
+      name,
+      ipn,
+      tel,
+      credit,
+      targetCredit,
+      sum,
+      intrest,
+      departmentNum,
+      textNote,
+    }
+  );
+  const result = await Client.find({ departmentNum });
+  console.log(result);
   res.json({
     status: "success",
     code: 200,
@@ -87,5 +131,5 @@ module.exports = {
   clientList,
   addClient,
   delClient,
-  updateClient
+  updateClient,
 };

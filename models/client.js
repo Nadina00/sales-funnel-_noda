@@ -3,6 +3,9 @@ const {model} = require("mongoose")
 const mongoose = require('mongoose');
 
 const clientSchema = new Schema({
+  date: {
+    type: Date
+  },
   name: {
     type: String,
   },
