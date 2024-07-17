@@ -3,7 +3,6 @@ const { Client } = require("../models/client");
 
 const clientList = async (req, res, next) => {
   const { departmentNum } = req.body;
-  console.log(departmentNum);
   let result = {};
   if (departmentNum === "Головний офіс") {
     result = await Client.find({});
